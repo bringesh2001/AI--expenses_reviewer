@@ -1,6 +1,5 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { LayoutDashboard, FilePlus, MessageSquare, LogOut } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { LayoutDashboard, FilePlus, MessageSquare } from "lucide-react";
 
 const nav = [
   { to: "/", label: "History", icon: LayoutDashboard },
@@ -9,14 +8,6 @@ const nav = [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { user, signOut } = useAuth();
-  const navigate = useNavigate();
-
-  async function handleSignOut() {
-    await signOut();
-    navigate("/login");
-  }
-
   return (
     <div className="min-h-screen flex bg-gray-50">
       {/* Sidebar */}
@@ -43,15 +34,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </NavLink>
           ))}
         </nav>
-        <div className="px-4 py-4 border-t border-gray-200">
-          <div className="text-xs text-gray-500 truncate mb-2">{user?.email}</div>
-          <button
-            onClick={handleSignOut}
-            className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800"
-          >
-            <LogOut size={14} /> Sign out
-          </button>
-        </div>
       </aside>
 
       {/* Main content */}

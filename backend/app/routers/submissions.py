@@ -12,7 +12,6 @@ from ..models.submission import Submission, SubmissionStatus
 from ..models.line_item import LineItem
 from ..models.employee import Employee
 from ..models.audit_log import AuditLog, AuditAction, ActorType
-from ..auth import get_current_user_id
 
 router = APIRouter(prefix="/submissions", tags=["submissions"])
 
@@ -182,10 +181,10 @@ async def submit_for_review(
 async def review_submission(
     submission_id: uuid.UUID,
     body: ReviewAction,
-    user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
     """Approve, reject, or send back a submission. Approved submissions become read-only."""
+    user_id = "system"
     sub = await _get_sub_with_items(submission_id, db)
     if sub.status not in (SubmissionStatus.pending_review.value,):
         raise HTTPException(status_code=409, detail=f"Cannot review from status '{sub.status}'")
@@ -221,10 +220,10 @@ async def override_verdict(
     submission_id: uuid.UUID,
     item_id: uuid.UUID,
     body: OverrideRequest,
-    user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
     """Override the AI verdict on a single line item. Append-only audit entry."""
+    user_id = "system"
     sub = await _get_sub_with_items(submission_id, db)
     if sub.status == SubmissionStatus.approved.value:
         raise HTTPException(status_code=409, detail="Approved submissions are read-only")

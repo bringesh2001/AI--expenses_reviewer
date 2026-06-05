@@ -4,7 +4,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
 from ..database import get_db
-from ..auth import get_current_user_id
 from ..services.qa import answer_question
 
 router = APIRouter(prefix="/qa", tags=["qa"])
@@ -28,7 +27,6 @@ class QAResponse(BaseModel):
 @router.post("/", response_model=QAResponse)
 async def ask(
     body: QARequest,
-    user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
     if not body.question.strip():
@@ -36,7 +34,7 @@ async def ask(
 
     session = await answer_question(
         question=body.question.strip(),
-        user_id=user_id,
+        user_id="system",
         db=db,
     )
     return session
