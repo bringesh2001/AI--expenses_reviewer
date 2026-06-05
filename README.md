@@ -1,6 +1,6 @@
 <h1 align="center">
   <br/>
-  🧾 LoanLens — AI-Assisted Expense Pre-Review
+  🧾 AI-Assisted Expense Pre-Review
   <br/>
 </h1>
 
