@@ -1,0 +1,115 @@
+{
+  "submission_cases": [
+    {
+      "id": "case_001",
+      "description": "Priya Patel Chicago trip \u2014 flight",
+      "employee": {
+        "employee_id": "NW-05117",
+        "grade": 4,
+        "department": "Logistics Operations"
+      },
+      "trip": {
+        "destination": "Chicago, IL",
+        "purpose": "Vendor site visit",
+        "start_date": "2025-05-06",
+        "end_date": "2025-05-07"
+      },
+      "receipt": "01_american_flight.pdf",
+      "expected": {
+        "category": "airfare",
+        "vendor": "American Airlines",
+        "amount": 385.6,
+        "verdict": "compliant",
+        "confidence_min": 0.75,
+        "must_cite": [
+          "TEP-005"
+        ],
+        "must_not_cite": []
+      }
+    },
+    {
+      "id": "case_002",
+      "description": "Priya Patel Chicago trip \u2014 hotel",
+      "employee": {
+        "employee_id": "NW-05117",
+        "grade": 4,
+        "department": "Logistics Operations"
+      },
+      "trip": {
+        "destination": "Chicago, IL",
+        "purpose": "Vendor site visit",
+        "start_date": "2025-05-06",
+        "end_date": "2025-05-07"
+      },
+      "receipt": "02_hyatt_chicago.pdf",
+      "expected": {
+        "category": "lodging",
+        "vendor": "Hyatt Regency Chicago",
+        "amount": 245.0,
+        "verdict": "compliant",
+        "confidence_min": 0.75,
+        "must_cite": [
+          "TEP-004"
+        ],
+        "must_not_cite": []
+      }
+    }
+  ],
+  "qa_cases": [
+    {
+      "id": "qa_001",
+      "question": "What is the maximum hotel rate for Chicago?",
+      "expected_status": "in_scope",
+      "expected_answer_contains": [
+        "250",
+        "Tier 2"
+      ],
+      "must_cite": [
+        "TEP-004"
+      ]
+    },
+    {
+      "id": "qa_002",
+      "question": "Can I fly business class on a 4-hour domestic flight?",
+      "expected_status": "in_scope",
+      "expected_answer_contains": [
+        "economy",
+        "6"
+      ],
+      "must_cite": [
+        "TEP-005"
+      ]
+    },
+    {
+      "id": "qa_003",
+      "question": "Is alcohol reimbursable?",
+      "expected_status": "in_scope",
+      "expected_answer_contains": [
+        "VP",
+        "client entertainment"
+      ],
+      "must_cite": [
+        "TEP-003"
+      ]
+    },
+    {
+      "id": "qa_004",
+      "question": "What's the weather like in Chicago?",
+      "expected_status": "out_of_scope",
+      "expected_answer_contains": [],
+      "must_cite": []
+    },
+    {
+      "id": "qa_005",
+      "question": "What are the per-diem rates for Seattle?",
+      "expected_status": "in_scope",
+      "expected_answer_contains": [
+        "per-diem",
+        "Tier"
+      ],
+      "must_cite": [
+        "TEP-008"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Switchyard Dev Set Case",
+  "type": "object",
+  "properties": {
+    "submission_cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "employee", "trip", "receipt", "expected"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "employee": {
+            "type": "object",
+            "required": ["employee_id", "grade", "department"],
+            "properties": {
+              "employee_id": { "type": "string" },
+              "grade": { "type": "integer", "minimum": 1, "maximum": 6 },
+              "department": { "type": "string" }
+            }
+          },
+          "trip": {
+            "type": "object",
+            "required": ["destination", "purpose", "start_date", "end_date"],
+            "properties": {
+              "destination": { "type": "string" },
+              "purpose": { "type": "string" },
+              "start_date": { "type": "string", "format": "date" },
+              "end_date": { "type": "string", "format": "date" }
+            }
+          },
+          "receipt": { "type": "string" },
+          "expected": {
+            "type": "object",
+            "required": ["category", "verdict"],
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["airfare", "lodging", "meal", "ground_transport", "entertainment", "other"]
+              },
+              "vendor": { "type": "string" },
+              "amount": { "type": "number" },
+              "verdict": {
+                "type": "string",
+                "enum": ["compliant", "flagged", "needs_review", "rejected"]
+              },
+              "confidence_min": { "type": "number", "minimum": 0, "maximum": 1 },
+              "must_cite": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Policy IDs that must appear in citations"
+              },
+              "must_not_cite": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "qa_cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "expected_status"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "expected_status": {
+            "type": "string",
+            "enum": ["in_scope", "out_of_scope"]
+          },
+          "expected_answer_contains": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "must_cite": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+
+# Alembic
+backend/alembic/versions/__pycache__/
+
+# Environment (NEVER commit real credentials)
+.env
+*.env.local
+backend/.env
+frontend/.env.local
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Receipts / policy uploads (never commit real data)
+submissions/
+policies/*.pdf
+
+# Eval outputs
+eval/results/
+
+# Claude agent files
+.claude/
