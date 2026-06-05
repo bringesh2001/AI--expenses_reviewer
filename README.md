@@ -23,7 +23,7 @@
 
 ## What Is This?
 
-LoanLens is a full-stack AI system that automatically reviews employee expense submissions against company travel & expense (T&E) policy — and gives a traceable verdict with cited policy text before a human reviewer ever opens the claim.
+full-stack AI system that automatically reviews employee expense submissions against company travel & expense (T&E) policy — and gives a traceable verdict with cited policy text before a human reviewer ever opens the claim.
 
 An employee uploads a receipt PDF, the system:
 1. **Extracts** structured fields (vendor, amount, category, dates, cabin class, city, etc.) using a vision-capable LLM.
