@@ -9,7 +9,10 @@ from .routers import health, employees, submissions, qa
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await seed_employees()
+    try:
+        await seed_employees()
+    except Exception as e:
+        print(f"[startup] seed_employees skipped: {e}")
     yield
     await engine.dispose()
 
